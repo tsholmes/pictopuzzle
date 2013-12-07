@@ -23,7 +23,7 @@ public class WordSearchSolver extends PuzzleSolver<WordSearchResult> {
     	
     	WordSearchResult result = new WordSearchResult(word,dir,row,col);
     	
-    	if(dictionary.contains(word)){
+    	if(dictionary.contains(word.toLowerCase())){
     		found.add(word);
     		results.add(result);
     	}

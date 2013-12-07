@@ -66,8 +66,11 @@ public class WordSearchPuzzleSolve extends Activity {
 		while ( reader.hasNext() )
 		{
 			String s = reader.next();
-			dict.add( s );
-			
+
+			if (s.length() >= 3)
+				dict.add( s );
+			//Log.e("", "" + s);
+
 		}
 		
 
