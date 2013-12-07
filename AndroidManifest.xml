@@ -14,13 +14,42 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.pictopuzzle.MainActivity"
+            android:name="com.example.pictopuzzle.MainSplash"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.pictopuzzle.PuzzleSelect"
+            android:label="@string/title_activity_puzzle_select" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pictopuzzle.MainSplash" />
+        </activity>
+        <activity
+            android:name="com.example.pictopuzzle.WordSearchSplash"
+            android:label="@string/title_activity_word_search_splash" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pictopuzzle.PuzzleSelect" />
+        </activity>
+        <activity
+            android:name="com.example.pictopuzzle.SudokuSplash"
+            android:label="@string/title_activity_sudoku_splash" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.pictopuzzle.PuzzleSelect" />
+        </activity>
+        <activity
+            android:name="com.example.pictopuzzle.WordSearchPuzzleLoad"
+            android:label="@string/title_activity_word_search_puzzle_load" >
+        </activity>
+        <activity
+            android:name="com.example.pictopuzzle.WordSearchPuzzleSolve"
+            android:label="@string/title_activity_word_search_puzzle_solve" >
         </activity>
     </application>
 

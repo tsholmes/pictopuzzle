@@ -4,5 +4,10 @@
     <string name="app_name">pictopuzzle</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_puzzle_select">PuzzleSelect</string>
+    <string name="title_activity_word_search_splash">WordSearchSplash</string>
+    <string name="title_activity_sudoku_splash">SudokuSplash</string>
+    <string name="title_activity_word_search_puzzle_load">WordSearchPuzzleLoad</string>
+    <string name="title_activity_word_search_puzzle_solve">WordSearchPuzzleSolve</string>
 
 </resources>
