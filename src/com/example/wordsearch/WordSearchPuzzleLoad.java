@@ -28,10 +28,10 @@ public class WordSearchPuzzleLoad extends Activity {
 	}
 
     public void solveClick(View view) {
-    	Intent intent = new Intent( this, WordSearchPuzzleSolve.class );
-    	String boardData = ((EditText)findViewById(R.id.editText1)).getText().toString();
-    	intent.putExtra("BOARD_DATA", boardData );
-    	startActivity(intent);
+//    	Intent intent = new Intent( this, WordSearchPuzzleSolve.class );
+//    	String boardData = ((EditText)findViewById(R.id.editText1)).getText().toString();
+//    	intent.putExtra("BOARD_DATA", boardData );
+//    	startActivity(intent);
         // Do something in response to button
     }
 }

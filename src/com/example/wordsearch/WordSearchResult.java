@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.example.wordsearch;
 
 import android.graphics.Point;
@@ -41,37 +41,3 @@ public class WordSearchResult extends PuzzleResult {
 		return ret;
 	}
 }
-=======
-package com.example.wordsearch;
-
-public class WordSearchResult extends PuzzleResult {
-	
-	private String word;
-	private Direction dir;
-	private int row;
-	private int col;
-	
-	public WordSearchResult(String a, Direction b, int c, int d){
-		word = a;
-		dir = b;
-		row = c;
-		col = d;
-	}
-	
-	public String getWord(){
-		return word;
-	}
-	
-	public Direction getDir(){
-		return dir;
-	}
-	
-	public int getRow(){
-		return row;
-	}
-	
-	public int getCol(){
-		return col;
-	}
-}
->>>>>>> f6a928c2b7da7141eaa55b2868516124abaa3e8d
