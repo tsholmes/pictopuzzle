@@ -1,5 +1,7 @@
 package com.example.pictopuzzle;
 
+import com.example.wordsearch.WordSearchSplash;
+
 import android.app.Activity;
 
 public enum PuzzleType {

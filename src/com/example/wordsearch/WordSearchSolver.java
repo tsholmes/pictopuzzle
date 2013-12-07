@@ -11,7 +11,6 @@ public class WordSearchSolver extends PuzzleSolver<WordSearchResult> {
 	private char[][] data;
     
     public WordSearchSolver(char[][] d, HashSet<String> dict){
-    	
     	found = new HashSet<String>();
     	results = new Vector<WordSearchResult>();
     	data = d;

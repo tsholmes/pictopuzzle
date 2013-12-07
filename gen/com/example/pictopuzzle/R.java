@@ -28,7 +28,7 @@ public final class R {
         public static final int button1=0x7f080003;
         public static final int editText1=0x7f080002;
         public static final int scrollView1=0x7f080000;
-        public static final int textField1=0x7f080004;
+        public static final int surfaceView1=0x7f080004;
         public static final int textView1=0x7f080001;
     }
     public static final class layout {

@@ -1,4 +1,9 @@
-package com.example.pictopuzzle;
+package com.example.wordsearch;
+
+import com.example.pictopuzzle.R;
+import com.example.pictopuzzle.R.id;
+import com.example.pictopuzzle.R.layout;
+import com.example.pictopuzzle.R.menu;
 
 import android.app.Activity;
 import android.content.Intent;

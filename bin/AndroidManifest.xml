@@ -30,7 +30,7 @@
                 android:value="com.example.pictopuzzle.MainSplash" />
         </activity>
         <activity
-            android:name="com.example.pictopuzzle.WordSearchSplash"
+            android:name="com.example.wordsearch.WordSearchSplash"
             android:label="@string/title_activity_word_search_splash" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -44,11 +44,11 @@
                 android:value="com.example.pictopuzzle.PuzzleSelect" />
         </activity>
         <activity
-            android:name="com.example.pictopuzzle.WordSearchPuzzleLoad"
+            android:name="com.example.wordsearch.WordSearchPuzzleLoad"
             android:label="@string/title_activity_word_search_puzzle_load" >
         </activity>
         <activity
-            android:name="com.example.pictopuzzle.WordSearchPuzzleSolve"
+            android:name="com.example.wordsearch.WordSearchPuzzleSolve"
             android:label="@string/title_activity_word_search_puzzle_solve" >
         </activity>
     </application>
