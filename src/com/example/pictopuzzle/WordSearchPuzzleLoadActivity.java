@@ -13,6 +13,7 @@ import android.content.res.AssetManager;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
+import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -65,12 +66,28 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		});
     }
     
+    private void setMaxSize(Parameters params) {
+    	int max = 0;
+    	int maxx = 0;
+    	int maxy = 0;
+    	for (Size sz : params.getSupportedPictureSizes()) {
+    		int val = sz.width * sz.height;
+    		if (val > max && val < 8000000) {
+    			max = val;
+    			maxx = sz.width;
+    			maxy = sz.height;
+    		}
+    	}
+    	params.setPictureSize(maxx, maxy);
+    }
+    
     @Override
     protected void onStart() {
     	super.onStart();
     	
     	camera = Camera.open();
     	Parameters params = camera.getParameters();
+    	setMaxSize(params);
     	params.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
     	params.setFlashMode(Parameters.FLASH_MODE_TORCH);
     	camera.setParameters(params);
