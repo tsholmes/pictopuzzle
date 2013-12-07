@@ -34,32 +34,37 @@
         </activity>
         <activity
             android:name="com.example.pictopuzzle.PuzzleSelect"
-            android:label="@string/title_activity_puzzle_select" >
+            android:label="@string/title_activity_puzzle_select"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.pictopuzzle.MainSplash" />
         </activity>
         <activity
             android:name="com.example.wordsearch.WordSearchSplash"
-            android:label="@string/title_activity_word_search_splash" >
+            android:label="@string/title_activity_word_search_splash"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.pictopuzzle.PuzzleSelect" />
         </activity>
         <activity
             android:name="com.example.pictopuzzle.SudokuSplash"
-            android:label="@string/title_activity_sudoku_splash" >
+            android:label="@string/title_activity_sudoku_splash"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.pictopuzzle.PuzzleSelect" />
         </activity>
         <activity
             android:name="com.example.pictopuzzle.WordSearchPuzzleLoadActivity"
-            android:label="@string/title_activity_word_search_puzzle_load" >
+            android:label="@string/title_activity_word_search_puzzle_load"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.example.wordsearch.WordSearchPuzzleSolve"
-            android:label="@string/title_activity_word_search_puzzle_solve" >
+            android:label="@string/title_activity_word_search_puzzle_solve"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
