@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
@@ -20,6 +21,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.example.wordsearch.WordSearchPuzzleSolve;
 import com.googlecode.leptonica.android.Binarize;
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
@@ -265,6 +267,18 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		
 		Log.e("TEXT", text);
 		Log.e("BOARD", Arrays.toString(board));
+		
+		String b = "";
+		for (int i = 0; i < board.length; i++) {
+			if (i != 0) b += "\n";
+			b += board[i];
+		}
+		
+		Intent intent = new Intent(this, WordSearchPuzzleSolve.class);
+		intent.putExtra("BOARD_DATA", b);
+		startActivity(intent);
+		
+		finish();
 
 		api.clear();
 	}
