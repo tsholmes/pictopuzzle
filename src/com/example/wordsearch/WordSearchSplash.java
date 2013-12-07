@@ -57,7 +57,7 @@ public class WordSearchSplash extends Activity {
 	
 
     public void solveClick(View view) {
-    	Intent intent = new Intent( this, WordSearchPuzzleLoad.class );
+    	Intent intent = new Intent( this, WordSearchPuzzleLoadActivity.class );
     	startActivity(intent);
         // Do something in response to button
     }

@@ -7,6 +7,15 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="14" />
+    
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+     <!-- Allows access to the flashlight -->
+ <permission android:name="android.permission.FLASHLIGHT"
+             android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
+             android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +23,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.pictopuzzle.MainSplash"
-            android:label="@string/app_name" >
+            android:name="com.example.pictopuzzle.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +54,7 @@
                 android:value="com.example.pictopuzzle.PuzzleSelect" />
         </activity>
         <activity
-            android:name="com.example.wordsearch.WordSearchPuzzleLoad"
+            android:name="com.example.pictopuzzle.WordSearchPuzzleLoadActivity"
             android:label="@string/title_activity_word_search_puzzle_load" >
         </activity>
         <activity
