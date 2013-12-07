@@ -227,10 +227,16 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
     	camera.setParameters(params);
 		
 		Pix pix = ReadFile.readMem(pic);
+		Pix last = pix;
 
 		pix = Scale.scale(pix, 0.25f);
+		last.recycle(); last = pix;
 		pix = Rotate.rotate(pix, 90f);
+		last.recycle(); last = pix;
 		pix = Binarize.otsuAdaptiveThreshold(pix);
+		last.recycle(); last = pix;
+		
+		
 		
 		String lower = "abcdefghijklmnopqrstuvwxyz";
 		String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -254,6 +260,8 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		api.setImage(pix);
 		
 		text = api.getUTF8Text();
+		
+		pix.recycle();
 		
 		String[] lines = text.split("\n");
 		
