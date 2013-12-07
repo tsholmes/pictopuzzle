@@ -54,7 +54,7 @@
                 android:value="com.example.pictopuzzle.PuzzleSelect" />
         </activity>
         <activity
-            android:name="com.example.pictopuzzle.WordSearchPuzzleLoad"
+            android:name="com.example.pictopuzzle.WordSearchPuzzleLoadActivity"
             android:label="@string/title_activity_word_search_puzzle_load" >
         </activity>
         <activity
