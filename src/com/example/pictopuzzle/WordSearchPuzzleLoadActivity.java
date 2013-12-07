@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -22,6 +23,7 @@ import android.view.View.OnClickListener;
 import com.googlecode.leptonica.android.Binarize;
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
+import com.googlecode.leptonica.android.Rotate;
 import com.googlecode.leptonica.android.Scale;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
@@ -70,7 +72,7 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
     	params.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
     	params.setFlashMode(Parameters.FLASH_MODE_TORCH);
     	camera.setParameters(params);
-    	//camera.setDisplayOrientation(90);
+    	camera.setDisplayOrientation(90);
     	String[] paths = new String[] { DATA_PATH, DATA_PATH + "tessdata/" };
     	
     	String TAG = "pictopuzzle";
@@ -208,7 +210,7 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		Pix pix = ReadFile.readMem(pic);
 
 		pix = Scale.scale(pix, 0.25f);
-		//pix = Rotate.rotate(pix, 90f);
+		pix = Rotate.rotate(pix, 90f);
 		pix = Binarize.otsuAdaptiveThreshold(pix);
 		
 		String lower = "abcdefghijklmnopqrstuvwxyz";
@@ -234,7 +236,35 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		
 		text = api.getUTF8Text();
 		
+		String[] lines = text.split("\n");
+		
+		int max = 0;
+		int maxs = 0;
+		for (int i = 0; i < lines.length; i++) {
+			String str = "";
+			for (char c : lines[i].toCharArray()) {
+				if (c != ' ') str += c;
+			}
+			lines[i] = str;
+		}
+		for (int i = 0; i < lines.length; i++) {
+			for (int j = i + 1; j < lines.length; j++) {
+				if (lines[i].length() > lines[j].length() || lines[i].length() + 2 < lines[j].length()) break;
+				if (j - i + 1 > max) {
+					max = j - i+ 1;
+					maxs = i;
+				}
+			}
+		}
+		
+		String[] board = new String[max];
+		
+		for (int i = maxs; i < maxs + max; i++) {
+			board[i-maxs] = lines[i].substring(0,lines[maxs].length());
+		}
+		
 		Log.e("TEXT", text);
+		Log.e("BOARD", Arrays.toString(board));
 
 		api.clear();
 	}
