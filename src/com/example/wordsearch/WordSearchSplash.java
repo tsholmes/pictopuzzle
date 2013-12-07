@@ -3,7 +3,6 @@ package com.example.wordsearch;
 import com.example.pictopuzzle.R;
 import com.example.pictopuzzle.R.layout;
 import com.example.pictopuzzle.R.menu;
-import com.example.pictopuzzle.WordSearchPuzzleLoadActivity;
 
 import android.os.Bundle;
 import android.app.Activity;

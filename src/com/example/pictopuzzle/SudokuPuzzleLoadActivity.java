@@ -10,17 +10,18 @@ import java.util.Arrays;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Point;
 import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.example.wordsearch.WordSearchPuzzleSolve;
 import com.googlecode.leptonica.android.Binarize;
@@ -30,8 +31,8 @@ import com.googlecode.leptonica.android.Rotate;
 import com.googlecode.leptonica.android.Scale;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
-public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHolder.Callback, Camera.PictureCallback {
-	
+public class SudokuPuzzleLoadActivity extends Activity implements SurfaceHolder.Callback, Camera.PictureCallback {
+
 	private SurfaceView cameraSurface;
 	private SurfaceHolder holder;
 	private Camera camera;
@@ -40,32 +41,49 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 	
 	private static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/pictopuzzle/";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_search_puzzle_load);
-        
-        cameraSurface = (SurfaceView)findViewById(R.id.cameraSurface);
-        
-        holder = cameraSurface.getHolder();
-        
-        holder.addCallback(this);
-        
-        cameraSurface.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				camera.autoFocus(new AutoFocusCallback() {
-					
-					@Override
-					public void onAutoFocus(boolean arg0, Camera arg1) {
-						camera.takePicture(null, null, WordSearchPuzzleLoadActivity.this);
-					}
-				});
-			}
-		});
-    }
-    
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_sudoku_puzzle_load);
+		// Show the Up button in the action bar.
+		setupActionBar();
+	}
+
+	/**
+	 * Set up the {@link android.app.ActionBar}.
+	 */
+	private void setupActionBar() {
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.sudoku_puzzle_load, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This ID represents the Home or Up button. In the case of this
+			// activity, the Up button is shown. Use NavUtils to allow users
+			// to navigate up one level in the application structure. For
+			// more details, see the Navigation pattern on Android Design:
+			//
+			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+			//
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
     private void setMaxSize(Parameters params) {
     	int max = 0;
     	int maxx = 0;
@@ -219,6 +237,102 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		// TODO Auto-generated method stub
 		
 	}
+	private double squareSize;
+	private double squareSizeTolerance;
+	private static final int pixelIter = 1;
+	
+	public boolean isBlack ( int n )
+	{
+		return n == 1;
+	}
+	
+	public Point isEmptySquare( Pix pix, double x, double y )
+	{
+		int left = -1;
+		int right = -1;
+		int top = -1;
+		int bottom = -1;
+		
+		for ( int i = 0; i < squareSize; i += pixelIter )
+		{
+			if ( left == -1 && isBlack(getPixel(pix,(int)(x - i), (int)y)) )
+			{
+				left = (int)(x - i);
+			}
+			if ( right == -1 && isBlack(getPixel(pix,(int)(x + i), (int)y)) )
+			{
+				right = (int)(x + i);
+			}
+			if ( top == -1 && isBlack(getPixel(pix,(int)(x), (int)(y-i))) )
+			{
+				top = (int)(y - i);
+			}
+			if ( bottom == -1 && isBlack(getPixel(pix,(int)(x), (int)(y+i))) )
+			{
+				bottom = (int)(y + i);
+			}
+		}
+		
+		Point ret = null;
+		if ( Math.abs( right - left - squareSize ) < squareSizeTolerance )
+		{
+			if ( Math.abs( bottom - top - squareSize ) < squareSizeTolerance )
+			{
+				ret = new Point( left, top );
+			}
+		}
+		return ret;
+	}
+	
+	private Point getCellLocation( Pix pix, double x, double y )
+	{
+		// get y less
+		int i;
+		for ( i = 0; i < 9; i ++ )
+		{
+			boolean foundLine = false;
+			for ( int iter = 0; iter < squareSize; iter += pixelIter )
+			{
+				if ( isBlack(getPixel( pix, (int)(x + squareSize / 2), (int)(y + squareSize / 2 - i * squareSize - iter ))))
+				{
+					foundLine = true;
+					break;
+				}
+			}
+			if ( !foundLine ) break;
+		}
+		i--;
+		
+		int j;
+		for ( j = 0; j < 9; j++ )
+		{
+			boolean foundLine = false;
+			for ( int iter = 0; iter < squareSize; iter += pixelIter )
+			{
+				if ( isBlack(getPixel( pix, (int)(x + squareSize / 2 + j * squareSize + iter), (int)(y + squareSize / 2  ))))
+				{
+					foundLine = true;
+					break;
+				}
+			}
+			if ( !foundLine ) break;
+		}
+		j--;
+		
+		return new Point(j, i);
+	}
+
+	private int getPixel(Pix pix, int i, int j) {
+		if ( i < 0 || i >= pix.getWidth() )
+		{
+			return 0;
+		}
+		if ( j < 0 || j >= pix.getHeight() )
+		{
+			return 0;
+		}
+		return pix.getPixel(i, j);
+	}
 
 	@Override
 	public void onPictureTaken(byte[] pic, Camera camera) {
@@ -232,15 +346,40 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		pix = Rotate.rotate(pix, 90f);
 		pix = Binarize.otsuAdaptiveThreshold(pix);
 		
-		String lower = "abcdefghijklmnopqrstuvwxyz";
-		String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String digits = "123456789";
 		
-		api.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, lower + upper);
+		api.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, digits);
+		
+		squareSize = pix.getWidth() / 9.0;
+		squareSizeTolerance = squareSize / 8.0;
+		
+		boolean foundStart = false;
+		double foundX = pix.getWidth() / 2;
+		double foundY = pix.getHeight() / 2;
+		
+		int searchIndex= 0;
+		while ( !foundStart && searchIndex < 81 )
+		{
+			int dx = searchIndex % 9;
+			dx -= 4;
+			int dy = searchIndex / 9;
+			dy -= 4;
+			Point p = isEmptySquare(pix, foundX + (dx * squareSize), foundY + (dy * squareSize));
+			if ( p != null )
+			{
+				foundX = p.x;
+				foundY = p.y;
+				foundStart = true;
+			}
+		}
+		
+		Point cellLoc = getCellLocation( pix, foundX, foundY ); 
+		
 		api.setImage(pix);
 		
 		String text = api.getUTF8Text();
 		api.clear();
-		
+/*		
 		int lowcount = 0;
 		int upcount = 0;
 		for (char c : text.toCharArray()) {
@@ -297,7 +436,6 @@ public class WordSearchPuzzleLoadActivity extends Activity implements SurfaceHol
 		
 		finish();
 
-		api.clear();
+		api.clear();*/
 	}
-    
 }

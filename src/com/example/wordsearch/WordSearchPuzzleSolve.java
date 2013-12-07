@@ -4,9 +4,11 @@ import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import android.app.Activity;
@@ -26,7 +28,7 @@ import com.example.pictopuzzle.R;
 
 public class WordSearchPuzzleSolve extends Activity {
 
-	HashMap<String, WordSearchResult> searchResults;
+	TreeMap<String, WordSearchResult> searchResults;
 	WordSearchDrawer drawer;
 	SurfaceView surface;
 	
@@ -50,7 +52,7 @@ public class WordSearchPuzzleSolve extends Activity {
 			i++;
 		}
 
-		searchResults = new HashMap<String, WordSearchResult>();
+		searchResults = new TreeMap<String, WordSearchResult>();
 		
 		Scanner reader = null;
 		try {
@@ -89,6 +91,7 @@ public class WordSearchPuzzleSolve extends Activity {
 		WordSearchSolver solver = new WordSearchSolver(drawer.wordSearchData, dict);
 		solver.solve();
 		Vector<WordSearchResult> results = solver.getResult();
+		Collections.sort(results);
 		
 		for ( WordSearchResult r : results )
 		{

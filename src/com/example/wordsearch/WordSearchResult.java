@@ -3,7 +3,7 @@ package com.example.wordsearch;
 
 import android.graphics.Point;
 
-public class WordSearchResult extends PuzzleResult {
+public class WordSearchResult extends PuzzleResult implements Comparable<WordSearchResult> {
 	
 	private String word;
 	private Direction dir;
@@ -39,5 +39,11 @@ public class WordSearchResult extends PuzzleResult {
 		ret[1] = new Point( col + dir.x * (word.length() -1), row + dir.y * (word.length()-1) );
 		
 		return ret;
+	}
+
+	@Override
+	public int compareTo(WordSearchResult another) {
+		
+		return word.compareTo(another.getWord());
 	}
 }

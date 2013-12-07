@@ -94,11 +94,6 @@ public class WordSearchDrawer implements SurfaceHolder.Callback{
 			for ( int j = 0; j < wordSearchData[0].length; j++ )
 			{
 				RectF r = new RectF(j * blockSize, i * blockSize, j * blockSize + blockSize, i * blockSize + blockSize);
-				Paint p = new Paint();
-				p.setStyle(Style.STROKE);
-				p.setColor(Color.YELLOW);
-				p.setStrokeWidth(2);
-				canvas.drawRect(r, p);
 				
 				canvas.drawText("" + wordSearchData[i][j], r.left + blockSize/2, r.top + blockSize/2 + yOffset, fontPaint);
 			}

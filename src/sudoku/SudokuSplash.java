@@ -1,9 +1,16 @@
-package com.example.pictopuzzle;
+package sudoku;
+
+import com.example.pictopuzzle.R;
+import com.example.pictopuzzle.R.layout;
+import com.example.pictopuzzle.R.menu;
+import com.example.wordsearch.WordSearchPuzzleLoadActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.support.v4.app.NavUtils;
 
 public class SudokuSplash extends Activity {
@@ -20,7 +27,7 @@ public class SudokuSplash extends Activity {
 	 * Set up the {@link android.app.ActionBar}.
 	 */
 	private void setupActionBar() {
-
+ 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 	}
@@ -48,5 +55,11 @@ public class SudokuSplash extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+    public void solveClick(View view) {
+    	Intent intent = new Intent( this, WordSearchPuzzleLoadActivity.class );
+    	startActivity(intent);
+        // Do something in response to button
+    }
 
 }
