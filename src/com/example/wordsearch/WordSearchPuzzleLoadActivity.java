@@ -1,4 +1,4 @@
-package com.example.pictopuzzle;
+package com.example.wordsearch;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,7 +22,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.example.wordsearch.WordSearchPuzzleSolve;
+import com.example.pictopuzzle.R;
+import com.example.pictopuzzle.R.id;
+import com.example.pictopuzzle.R.layout;
 import com.googlecode.leptonica.android.Binarize;
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;

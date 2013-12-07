@@ -9,5 +9,6 @@
     <string name="title_activity_sudoku_splash">SudokuSplash</string>
     <string name="title_activity_word_search_puzzle_load">WordSearchPuzzleLoad</string>
     <string name="title_activity_word_search_puzzle_solve">WordSearchPuzzleSolve</string>
+    <string name="title_activity_sudoku_puzzle_load">SudokuPuzzleLoadActivity</string>
 
 </resources>
