@@ -3,7 +3,7 @@ package com.example.wordsearch;
 
 public enum Direction {
 	
-	UP(0, 0, -1), UP_RIGHT(1, 1, -1), RIGHT(2, 1, 0), DOWN_RIGHT(3, 1, 1), DOWN(4, 0, 1), DOWN_LEFT(5, -1, 1), LEFT(6, -1, 0), UP_LEFT(7, 1, -1);
+	UP(0, 0, -1), UP_RIGHT(1, 1, -1), RIGHT(2, 1, 0), DOWN_RIGHT(3, 1, 1), DOWN(4, 0, 1), DOWN_LEFT(5, -1, 1), LEFT(6, -1, 0), UP_LEFT(7, -1, -1);
 	public final int dir;
 	public final int x;
 	public final int y;

@@ -1,6 +1,6 @@
 package com.example.wordsearch;
 
-import java.util.List;
+import java.util.HashMap;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,7 +16,12 @@ import android.view.SurfaceHolder;
 public class WordSearchDrawer implements SurfaceHolder.Callback{
 
 	public char[][] wordSearchData; 
-	public List<Point[]> circledWords;
+	public HashMap<String, WordSearchResult> circledWords;
+	
+	public WordSearchDrawer() {
+		circledWords = new HashMap<String, WordSearchResult>();
+	}
+	
 	
 	@Override
 	public void surfaceChanged(SurfaceHolder holder, int format, int width,
@@ -33,7 +38,6 @@ public class WordSearchDrawer implements SurfaceHolder.Callback{
 	}
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
-		draw(holder);
 		// TODO Auto-generated method stub
 		
 	}
@@ -45,9 +49,15 @@ public class WordSearchDrawer implements SurfaceHolder.Callback{
 		Paint screenPaint = new Paint();
 		screenPaint.setColor(Color.WHITE);
 		canvas.drawRect(screenRect, screenPaint);
+		screenPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 		
+	
 
 		float blockSize = (canvas.getWidth() + 0.0f) / wordSearchData[0].length;
+		if ( blockSize * wordSearchData.length > canvas.getHeight() )
+		{
+			blockSize = (canvas.getHeight() + 0.0f) / wordSearchData.length;
+		}
 		float circleRadius = blockSize / 2 - blockSize / 10;
 		
 		
@@ -59,6 +69,8 @@ public class WordSearchDrawer implements SurfaceHolder.Callback{
 		circlePaint.setStrokeWidth(3);
 		circlePaint.setColor( Color.rgb(128, 128, 255) );
 		circlePaint.setStyle(Style.STROKE);
+
+		circlePaint.setFlags(Paint.ANTI_ALIAS_FLAG);
 		
 		for ( int i = 2; i < 2000; i ++ )
 		{
@@ -92,9 +104,9 @@ public class WordSearchDrawer implements SurfaceHolder.Callback{
 			}
 		}
 		
-		for ( Point[] p : circledWords )
+		for ( WordSearchResult v : circledWords.values() )
 		{
-			
+			Point[] p = v.convertToPoints();
 			double startLeft = p[0].x * blockSize + blockSize/2;
 			startLeft-=circleRadius;
 			double startTop = p[0].y * blockSize + blockSize/2;
